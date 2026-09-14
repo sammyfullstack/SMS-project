@@ -1,0 +1,31 @@
+{
+  "profile": {
+    "fullName": "mba samuel",
+    "email": "samuelifeanyi943@gmail.com",
+    "role": "Administrator",
+    "phone": "07040405156",
+    "name": "Mba samuel"
+  },
+  "systemSettings": {
+    "schoolName": "Apex Academy",
+    "session": "2025/2026",
+    "semester": "First Semester"
+  },
+  "students": [
+    {
+      "name": "samuel ifeanyi",
+      "email": "samuelifeanyi943@gmail.com",
+      "age": 21,
+      "department": "Computer Science",
+      "level": "400",
+      "phone": "07040405156",
+      "id": 1788282946895
+    },
+    {
+      "id": 1,
+      "name": "John Doe",
+      "level": "100",
+      "department": "Computer Science"
+    }
+  ]
+}
