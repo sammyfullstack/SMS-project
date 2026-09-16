@@ -47,38 +47,40 @@ export default function SettingsView({
         ))}
       </div>
 
-      {/* Active sub-tab */}
-      {settingsSubTab === "Profile" && (
-        <ProfileTab
-          profile={profileSettings}
-          setProfile={setProfileSettings}
-          onSave={handleSaveProfile}
-          theme={theme}
-        />
-      )}
-      {settingsSubTab === "System" && (
-        <SystemTab
-          system={systemSettings}
-          setSystem={setSystemSettings}
-          onSave={handleSaveSystem}
-          theme={theme}
-        />
-      )}
-      {settingsSubTab === "Appearance" && (
-        <AppearanceTab
-          appearance={appearance}
-          setAppearance={setAppearance}
-          theme={theme}
-        />
-      )}
-      {settingsSubTab === "Notifications" && (
-        <NotificationsTab
-          notifications={notifications}
-          setNotifications={setNotifications}
-          theme={theme}
-        />
-      )}
-      {settingsSubTab === "Data" && <DataTab theme={theme} />}
+      <div>
+        {/* Active sub-tab */}
+        {settingsSubTab === "Profile" && (
+          <ProfileTab
+            profile={profileSettings}
+            setProfile={setProfileSettings}
+            onSave={handleSaveProfile}
+            theme={theme}
+          />
+        )}
+        {settingsSubTab === "System" && (
+          <SystemTab
+            system={systemSettings}
+            setSystem={setSystemSettings}
+            onSave={handleSaveSystem}
+            theme={theme}
+          />
+        )}
+        {settingsSubTab === "Appearance" && (
+          <AppearanceTab
+            appearance={appearance}
+            setAppearance={setAppearance}
+            theme={theme}
+          />
+        )}
+        {settingsSubTab === "Notifications" && (
+          <NotificationsTab
+            notifications={notifications}
+            setNotifications={setNotifications}
+            theme={theme}
+          />
+        )}
+        {settingsSubTab === "Data" && <DataTab theme={theme} />}
+      </div>
     </div>
   );
 }

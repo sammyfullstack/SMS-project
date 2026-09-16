@@ -14,6 +14,7 @@ function App() {
         <Route path="/levels" element={<StudentManagementSystem />} />
         <Route path="/reports" element={<StudentManagementSystem />} />
         <Route path="/settings" element={<StudentManagementSystem />} />
+
         {/* Unknown URLs fall back to the Dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

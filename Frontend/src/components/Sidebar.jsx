@@ -4,6 +4,7 @@
 // "Add Student" opens the drawer through the `onAddStudent` callback instead
 // of navigating, because it is an action rather than a destination.
 // ---------------------------------------------------------------------------
+import "../App.css";
 import { NavItem } from "./UIComponents";
 import {
   DashboardIcon,
@@ -46,54 +47,75 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
 
         {/* Navigation — each section maps to its own URL */}
         <nav style={styles.navMenu}>
-          <NavItem
-            label="Dashboard"
-            icon={DashboardIcon}
-            to="/"
-            active={activeTab === "Dashboard"}
-            theme={appearance}
-          />
-          <NavItem
-            label="Students"
-            icon={StudentsIcon}
-            to="/students"
-            active={activeTab === "Students"}
-            theme={appearance}
-          />
-          <NavItem
-            label="Add Student"
-            icon={AddUserIcon}
-            onClick={onAddStudent}
-            theme={appearance}
-          />
-          <NavItem
-            label="Departments"
-            icon={DeptIcon}
-            to="/departments"
-            active={activeTab === "Departments"}
-            theme={appearance}
-          />
-          <NavItem
-            label="Levels"
-            icon={LevelsIcon}
-            to="/levels"
-            active={activeTab === "Levels"}
-            theme={appearance}
-          />
-          <NavItem
-            label="Reports"
-            icon={ReportsIcon}
-            to="/reports"
-            active={activeTab === "Reports"}
-            theme={appearance}
-          />
-          <NavItem
-            label="Settings"
-            icon={SettingsIcon}
-            to="/settings"
-            active={activeTab === "Settings"}
-            theme={appearance}
-          />
+          <div className="nav-item">
+            <NavItem
+              className="nav-item"
+              label="Dashboard"
+              icon={DashboardIcon}
+              to="/"
+              active={activeTab === "Dashboard"}
+              theme={appearance}
+            />
+          </div>
+          <div className="nav-item">
+            <NavItem
+              className="nav-item"
+              label="Students"
+              icon={StudentsIcon}
+              to="/students"
+              active={activeTab === "Students"}
+              theme={appearance}
+            />
+          </div>
+          <div className="nav-item">
+            <NavItem
+              className="nav-item"
+              label="Add Student"
+              icon={AddUserIcon}
+              onClick={onAddStudent}
+              theme={appearance}
+            />
+          </div>
+          <div className="nav-item">
+            <NavItem
+              className="nav-item"
+              label="Departments"
+              icon={DeptIcon}
+              to="/departments"
+              active={activeTab === "Departments"}
+              theme={appearance}
+            />
+          </div>
+          <div className="nav-item">
+            <NavItem
+              className="nav-item"
+              label="Levels"
+              icon={LevelsIcon}
+              to="/levels"
+              active={activeTab === "Levels"}
+              theme={appearance}
+            />
+          </div>
+          <div className="nav-item">
+            <NavItem
+              className="nav-item"
+              label="Reports"
+              icon={ReportsIcon}
+              to="/reports"
+              active={activeTab === "Reports"}
+              theme={appearance}
+            />
+          </div>
+          <div className="nav-item">
+            <NavItem
+              className="nav-item"
+              label="Settings"
+              icon={SettingsIcon}
+              to="/settings"
+              active={activeTab === "Settings"}
+              theme={appearance}
+            />
+          </div>
         </nav>
       </div>
 

@@ -104,7 +104,7 @@ export default function StudentDrawer({
             </select>
           </FormField>
 
-          <FormField label="Phone Number" error={errors.phone} theme={theme}>
+          <FormField label="Matric No." error={errors.phone} theme={theme}>
             <input
               value={form.phone}
               onChange={(e) => setForm({ ...form, phone: e.target.value })}

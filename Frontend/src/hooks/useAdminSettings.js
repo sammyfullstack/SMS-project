@@ -5,9 +5,7 @@
 // ---------------------------------------------------------------------------
 import { useState, useEffect } from "react";
 
-export default function useAdminSettings(
-  apiUrl = "http://localhost:5000/api",
-) {
+export default function useAdminSettings(apiUrl = "http://localhost:5000/api") {
   // Admin profile — single source of truth for the header name/role and the
   // Settings > Profile form. Seeded from the backend on mount (see effect).
   const [profileSettings, setProfileSettings] = useState({

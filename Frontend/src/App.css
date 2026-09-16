@@ -1,0 +1,55 @@
+.nav-item:hover {
+  background-color: #1d283a !important;
+  color: #ffffff !important;
+  border-radius: 8px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.report-btn:hover {
+  background-color: #5f8cec !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.report-btn:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+  transition:
+    transform 0.05s ease,
+    opacity 0.05s ease;
+}
+
+.import-btn:hover {
+  background-color: #dadde2 !important;
+  transition: backgroung-color 0.2s ease;
+}
+
+.import-btn:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+  transition:
+    transform 0.05s ease,
+    opacity 0.05s ease;
+}
+
+.student-table-row {
+  transition: background-color 0.15s ease-in-out;
+}
+
+.student-table-row:hover {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  cursor: pointer;
+}
+
+/* Department card hover effect */
+.dept-card-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.dept-card-hover:hover {
+  transform: translateY(-3px);
+  /* border-color: #070708 !important; */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}

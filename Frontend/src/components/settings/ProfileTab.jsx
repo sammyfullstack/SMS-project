@@ -44,7 +44,7 @@ export default function ProfileTab({ profile, setProfile, onSave, theme }) {
             onChange={update("role")}
           />
         </FormField>
-        <FormField label="Phone Number" theme={theme}>
+        <FormField label="Matric No." theme={theme}>
           <input
             type="text"
             name="phone"
@@ -56,7 +56,11 @@ export default function ProfileTab({ profile, setProfile, onSave, theme }) {
         <button
           type="button"
           onClick={onSave}
-          style={{ ...styles.primarySearchBtn, alignSelf: "flex-start", marginTop: 6 }}
+          style={{
+            ...styles.primarySearchBtn,
+            alignSelf: "flex-start",
+            marginTop: 6,
+          }}
         >
           Save Profile
         </button>

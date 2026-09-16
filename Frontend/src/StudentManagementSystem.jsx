@@ -1,4 +1,3 @@
-// ---------------------------------------------------------------------------
 // StudentRegistry — the app shell (top-level component).
 //
 // Layout: Sidebar + TopBar + the view for the active route + the Add/Edit
@@ -10,7 +9,7 @@
 // Routing: the active section is driven entirely by the URL (react-router),
 // e.g. "/settings" renders the Settings view. Unknown URLs are redirected to
 // the Dashboard in App.jsx.
-// ---------------------------------------------------------------------------
+
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getStyles } from "./styles";

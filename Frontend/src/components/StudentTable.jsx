@@ -32,7 +32,7 @@ export default function StudentTable({
             <th style={styles.th}>Age</th>
             <th style={styles.th}>Department</th>
             <th style={styles.th}>Level</th>
-            <th style={styles.th}>Phone</th>
+            <th style={styles.th}>Matric No.</th>
             <th style={{ ...styles.th, textAlign: "right" }}>Actions</th>
           </tr>
         </thead>
@@ -41,7 +41,11 @@ export default function StudentTable({
             const globalIndex = pageStart + idx + 1;
             const avatarBg = getAvatarColor(s._id || s.id || idx);
             return (
-              <tr key={s._id || s.id || `student-${idx}`} style={styles.tr}>
+              <tr
+                key={s._id || s.id || `student-${idx}`}
+                style={styles.tr}
+                className="student-table-row"
+              >
                 <td style={{ ...styles.td, ...styles.tableIndexText }}>
                   {globalIndex}
                 </td>
