@@ -4,6 +4,10 @@
 // "Add Student" opens the drawer through the `onAddStudent` callback instead
 // of navigating, because it is an action rather than a destination.
 // ---------------------------------------------------------------------------
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { Drawer, IconButton, useMediaQuery } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import "../App.css";
 import { NavItem } from "./UIComponents";
 import {
@@ -17,37 +21,64 @@ import {
 } from "./Icons";
 import { getStyles } from "../styles";
 
-export default function Sidebar({ activeTab, appearance, onAddStudent }) {
+export default function Sidebar({
+  activeTab,
+  appearance,
+  onAddStudent,
+  isOpen,
+  onClose,
+}) {
   const styles = getStyles(appearance);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const location = useLocation;
 
-  return (
+  //Automatically close sidebar on mobile whenever the route/page changes
+  useEffect(() => {
+    if (isMobile && isOpen && onClose) {
+      onClose();
+    }
+  }, [location.pathname]);
+
+  //Close mobile drawer when clicking a navigation link
+  const handleNavClick = (action) => {
+    if (action) action();
+    if (isMobile && onClose) onClose();
+  };
+
+  const sidebarContent = () => (
     <aside style={styles.sidebar}>
       <div>
-        {/* Brand */}
+        {/* Brand header */}
         <div style={styles.brandHeader}>
           <div style={styles.logoIcon}>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
+            <img src="/logo-Icon.png" alt="logo" style={styles.logoImg} />
           </div>
           <div>
             <div style={styles.brandTitle}>SMS</div>
             <div style={styles.brandSubtitle}>Student Management System</div>
           </div>
+
+          {/*X button for Mobile*/}
+          {isMobile && (
+            <IconButton
+              onClick={onClose}
+              sx={{
+                color: "#9CA3AF",
+                "&:hover": {
+                  color: "#ffffff",
+                  backgroundColor: "rgba(255,255,255,0,0.08)",
+                },
+              }}
+              aria-label="close sidebar"
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          )}
         </div>
 
         {/* Navigation — each section maps to its own URL */}
         <nav style={styles.navMenu}>
-          <div className="nav-item">
+          <div onClick={() => handleNavClick()} className="nav-item">
             <NavItem
               className="nav-item"
               label="Dashboard"
@@ -57,7 +88,7 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
               theme={appearance}
             />
           </div>
-          <div className="nav-item">
+          <div onClick={() => handleNavClick()} className="nav-item">
             <NavItem
               className="nav-item"
               label="Students"
@@ -67,7 +98,7 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
               theme={appearance}
             />
           </div>
-          <div className="nav-item">
+          <div onClick={() => handleNavClick()} className="nav-item">
             <NavItem
               className="nav-item"
               label="Add Student"
@@ -76,7 +107,7 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
               theme={appearance}
             />
           </div>
-          <div className="nav-item">
+          <div onClick={() => handleNavClick()} className="nav-item">
             <NavItem
               className="nav-item"
               label="Departments"
@@ -86,7 +117,7 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
               theme={appearance}
             />
           </div>
-          <div className="nav-item">
+          <div onClick={() => handleNavClick()} className="nav-item">
             <NavItem
               className="nav-item"
               label="Levels"
@@ -96,7 +127,7 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
               theme={appearance}
             />
           </div>
-          <div className="nav-item">
+          <div onClick={() => handleNavClick()} className="nav-item">
             <NavItem
               className="nav-item"
               label="Reports"
@@ -106,7 +137,7 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
               theme={appearance}
             />
           </div>
-          <div className="nav-item">
+          <div onClick={() => handleNavClick()} className="nav-item">
             <NavItem
               className="nav-item"
               label="Settings"
@@ -134,4 +165,30 @@ export default function Sidebar({ activeTab, appearance, onAddStudent }) {
       </div>
     </aside>
   );
+
+  //wrap inside MUI Drawer when on mobile screens
+  if (isMobile) {
+    return (
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        open={isOpen}
+        close={onClose}
+        paperProps={{
+          style: {
+            backgroundColor: "transparent",
+            boxShadow: "none",
+            border: "none",
+            fontFamily: "inherit",
+            color: "inherit",
+          },
+        }}
+      >
+        {sidebarContent()}
+      </Drawer>
+    );
+  }
+
+  //Render static sidebar on desktop
+  return sidebarContent();
 }

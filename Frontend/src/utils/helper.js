@@ -36,7 +36,7 @@ export function validate(form) {
   const errors = {};
   const name = String(form.name || "").trim();
   const email = String(form.email || "").trim();
-  const phone = String(form.phone || "").trim();
+  const matricNo = String(form.matricNo || "").trim();
 
   if (!name) errors.name = "Enter full name.";
   if (!email) errors.email = "Enter email address.";
@@ -45,8 +45,8 @@ export function validate(form) {
   if (!form.age) errors.age = "Enter age.";
   else if (Number(form.age) < 14 || Number(form.age) > 80)
     errors.age = "Age must be between 14 and 80.";
-  if (!phone) errors.phone = "Enter phone number.";
-  else if (!/^[0-9+\-\s]{7,15}$/.test(phone))
-    errors.phone = "Invalid phone number.";
+  if (!matricNo) errors.matricNo = "Enter matricNo number.";
+  else if (!/^[0-9+\-\s]{7,15}$/.test(matricNo))
+    errors.matricNo = "Invalid matricNo number.";
   return errors;
 }

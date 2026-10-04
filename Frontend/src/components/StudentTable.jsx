@@ -77,7 +77,7 @@ export default function StudentTable({
                   <LevelBadge level={s.level} />
                 </td>
                 <td style={{ ...styles.td, ...styles.tableBodyText }}>
-                  {s.phone}
+                  {s.matricNo}
                 </td>
                 <td style={{ ...styles.td, textAlign: "right" }}>
                   {confirmDeleteId === s._id ? (
@@ -118,21 +118,21 @@ export default function StudentTable({
                         title="Edit"
                         style={styles.actionIconBtn}
                       >
-                        <EditIcon size={15} color="#2563EB" />
+                        <EditIcon sx={{ fontSize: 15, color: "#2563EB" }} />
                       </button>
                       <button
                         onClick={() => setConfirmDeleteId(s._id)}
                         title="Delete"
                         style={styles.actionIconBtn}
                       >
-                        <TrashIcon size={15} color="#EF4444" />
+                        <TrashIcon sx={{ fontSize: 15, color: "#EF4444" }} />
                       </button>
                       <button
                         onClick={() => openEdit(s)}
                         title="View Details"
                         style={styles.actionIconBtn}
                       >
-                        <EyeIcon size={15} color="#6B7280" />
+                        <EyeIcon sx={{ fontSize: 15, color: "#6B7280" }} />
                       </button>
                     </div>
                   )}

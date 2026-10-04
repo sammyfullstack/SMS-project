@@ -15,16 +15,42 @@ export default function ImportStudents({ styles }) {
 
     reader.onload = async (e) => {
       try {
-        // Read the file buffer (handles .xml, .xlsx, .xls, .csv automatically)
-        const bstr = e.target.result;
-        const workbook = XLSX.read(bstr, { type: "binary" });
+        const buf = e.target.result; // ArrayBuffer
+
+        // XML "spreadsheets" are text (Excel SpreadsheetML 2003). Decode the
+        // bytes into a real string first so UTF-8 BOM / UTF-16 files aren't
+        // mangled (readAsBinaryString + type:"array" both fail on UTF-16 XML).
+        let workbook;
+        if (/\.xml$/i.test(file.name)) {
+          const bytes = new Uint8Array(buf);
+          let text;
+          if (bytes[0] === 0xff && bytes[1] === 0xfe) {
+            text = new TextDecoder("utf-16le").decode(bytes);
+          } else if (bytes[0] === 0xfe && bytes[1] === 0xff) {
+            text = new TextDecoder("utf-16be").decode(bytes);
+          } else {
+            text = new TextDecoder("utf-8").decode(bytes); // strips BOM
+          }
+          workbook = XLSX.read(text, { type: "string" });
+        } else {
+          // .xlsx / .xls / .csv — let SheetJS detect the binary format
+          workbook = XLSX.read(buf, { type: "array" });
+        }
 
         // Grab the first sheet in the spreadsheet
         const worksheetName = workbook.SheetNames[0];
+        if (!worksheetName) {
+          throw new Error(
+            "No sheets found. XML files must be Excel 'XML Spreadsheet 2003' format.",
+          );
+        }
         const worksheet = workbook.Sheets[worksheetName];
 
         // Convert rows to JSON
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
+        if (jsonData.length === 0) {
+          throw new Error("The spreadsheet contains no data rows.");
+        }
 
         // Send to your Express backend
         const response = await axios.post(
@@ -33,15 +59,29 @@ export default function ImportStudents({ styles }) {
         );
         alert(`${response.data.count} students imported successfully!`);
       } catch (err) {
-        console.error("XML Import Error:", err);
-        alert("Failed to parse or import spreadsheet.");
+        console.error("Import Error:", err);
+        // Show the real reason (e.g. the backend's 400 message) instead of
+        // a generic alert, so import failures are actually diagnosable.
+        alert(
+          err.response?.data?.message ||
+            err.response?.data?.error ||
+            err.message ||
+            "Failed to parse or import spreadsheet.",
+        );
       } finally {
         setLoading(false);
         e.target.value = "";
       }
     };
 
-    reader.readAsBinaryString(file);
+    reader.onerror = () => {
+      setLoading(false);
+      alert("Could not read the selected file.");
+    };
+
+    // readAsArrayBuffer is the SheetJS-recommended path (readAsBinaryString
+    // is unreliable, especially for XML / UTF-16 content).
+    reader.readAsArrayBuffer(file);
   };
 
   const handleButtonClick = () => {

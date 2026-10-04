@@ -12,7 +12,7 @@ export default function useAdminSettings(apiUrl = "http://localhost:5000/api") {
     name: "Admin User",
     email: "admin@sms.edu",
     role: "Administrator",
-    phone: "08000000000",
+    matricNo: "08000000000",
   });
 
   // Academic / institutional settings (school name, session, semester).
@@ -44,7 +44,7 @@ export default function useAdminSettings(apiUrl = "http://localhost:5000/api") {
             name: data.fullName || data.name || "Admin User",
             email: data.email || "admin@sms.edu",
             role: data.role || "Administrator",
-            phone: data.phone || "08000000000",
+            matricNo: data.matricNo || "08000000000",
           });
         }
       })
@@ -78,7 +78,7 @@ export default function useAdminSettings(apiUrl = "http://localhost:5000/api") {
           fullName: profileSettings.name,
           email: profileSettings.email,
           role: profileSettings.role,
-          phone: profileSettings.phone,
+          matricNo: profileSettings.matricNo,
         }),
       });
       const data = await response.json();

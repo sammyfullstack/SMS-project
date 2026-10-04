@@ -1,5 +1,5 @@
 // StudentDrawer — the slide-over drawer used for adding/editing a student.
-// Fully controlled by the parent (`StudentManagementSystem`): it receives
+// Fully controlled by the parent (`Home`): it receives
 // `drawerOpen`, the form values/errors, and `setForm` to edit them.
 import { FormField } from "./UIComponents";
 import { DEPARTMENTS, LEVELS } from "../constants/studentData";
@@ -22,14 +22,7 @@ export default function StudentDrawer({
     <div onClick={closeDrawer} style={styles.overlay}>
       <div onClick={(e) => e.stopPropagation()} style={styles.drawer}>
         <div style={styles.drawerHeader}>
-          <h2
-            style={{
-              fontSize: 18,
-              fontWeight: 600,
-              color: "#ffffff",
-              margin: 0,
-            }}
-          >
+          <h2 theme={theme}>
             {editingId ? "Edit Student Details" : "Add New Student"}
           </h2>
           <button onClick={closeDrawer} style={styles.closeBtn}>
@@ -104,20 +97,25 @@ export default function StudentDrawer({
             </select>
           </FormField>
 
-          <FormField label="Matric No." error={errors.phone} theme={theme}>
+          <FormField label="Matric No." error={errors.matricNo} theme={theme}>
             <input
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              placeholder="08012345678"
+              value={form.matricNo}
+              onChange={(e) => setForm({ ...form, matricNo: e.target.value })}
+              placeholder="230****01"
               style={styles.formInput}
             />
           </FormField>
 
           <div style={{ display: "flex", gap: 10, marginTop: 12 }}>
-            <button type="submit" style={styles.submitBtn}>
+            <button
+              className="register-btn"
+              type="submit"
+              style={styles.submitBtn}
+            >
               {editingId ? "Save Changes" : "Register Student"}
             </button>
             <button
+              className="cancel-btn"
               type="button"
               onClick={closeDrawer}
               style={styles.drawerCancelBtn}

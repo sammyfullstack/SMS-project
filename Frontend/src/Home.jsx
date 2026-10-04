@@ -41,6 +41,11 @@ export default function StudentRegistry() {
   const records = useStudentRecords();
   const settings = useAdminSettings();
 
+  //Mobile sidebar drawer state
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const closeSidebar = () => setIsSidebarOpen(false);
+
   // ----- routing-derived active tab + local Settings sub-tab -----
   const location = useLocation();
   const activeTab = TAB_BY_PATH[location.pathname] ?? "Dashboard";
@@ -55,6 +60,8 @@ export default function StudentRegistry() {
         activeTab={activeTab}
         appearance={appearance}
         onAddStudent={records.openAdd}
+        isOpen={isSidebarOpen}
+        onClose={closeSidebar}
       />
 
       <div style={styles.mainWrapper}>
@@ -64,6 +71,7 @@ export default function StudentRegistry() {
           setSearch={records.setSearch}
           profileSettings={profileSettings}
           theme={appearance}
+          onToggleSidebar={toggleSidebar}
         />
 
         {/* Dynamic content area — the view for the active URL */}

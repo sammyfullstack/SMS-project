@@ -1,21 +1,16 @@
-// ---------------------------------------------------------------------------
 // Shared static data used by the student forms, filters and views.
-// ---------------------------------------------------------------------------
 
 // Departments offered by the institution (a dropdown in the Add/Edit drawer).
 export const DEPARTMENTS = [
   "Computer Science",
-  "Information Technology",
-  "Software Engineering",
-  "Cyber Security",
-  "Electrical Engineering",
-  "Mechanical Engineering",
+  "Botany",
+  "Biochemistry",
+  "Fisheries",
+  "Microbiology",
+  "Science Laboratory Technology(SLT)",
   "Mathematics",
   "Physics",
-  "Economics",
-  "Business Administration",
-  "Law",
-  "Biology",
+  "Zoology",
   "Chemistry",
 ];
 
@@ -40,5 +35,5 @@ export const emptyForm = {
   age: "",
   department: DEPARTMENTS[0],
   level: LEVELS[0],
-  phone: "",
+  matricNo: "",
 };

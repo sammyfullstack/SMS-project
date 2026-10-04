@@ -7,10 +7,9 @@ import { getStyles } from "../styles";
 import ProfileTab from "../components/settings/ProfileTab";
 import SystemTab from "../components/settings/SystemTab";
 import AppearanceTab from "../components/settings/AppearanceTab";
-import NotificationsTab from "../components/settings/NotificationsTab";
 import DataTab from "../components/settings/DataTab";
 
-const SUB_TABS = ["Profile", "System", "Appearance", "Notifications", "Data"];
+const SUB_TABS = ["Profile", "System", "Appearance", "Data"];
 
 export default function SettingsView({
   settingsSubTab,
@@ -21,8 +20,6 @@ export default function SettingsView({
   setSystemSettings,
   appearance,
   setAppearance,
-  notifications,
-  setNotifications,
   handleSaveProfile,
   handleSaveSystem,
   theme,
@@ -69,13 +66,6 @@ export default function SettingsView({
           <AppearanceTab
             appearance={appearance}
             setAppearance={setAppearance}
-            theme={theme}
-          />
-        )}
-        {settingsSubTab === "Notifications" && (
-          <NotificationsTab
-            notifications={notifications}
-            setNotifications={setNotifications}
             theme={theme}
           />
         )}

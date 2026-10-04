@@ -1,5 +1,5 @@
 // ProfileTab — Settings > Profile: the admin information form (name, email,
-// role, phone) plus a Save button. The inputs edit `profile` in place; saving
+// role, matricNo) plus a Save button. The inputs edit `profile` in place; saving
 // is handled by the parent hook via `onSave` (see hooks/useAdminSettings.js).
 import { FormField } from "../UIComponents";
 import { getStyles } from "../../styles";
@@ -47,10 +47,10 @@ export default function ProfileTab({ profile, setProfile, onSave, theme }) {
         <FormField label="Matric No." theme={theme}>
           <input
             type="text"
-            name="phone"
+            name="matricNo"
             style={styles.formInput}
-            value={profile.phone}
-            onChange={update("phone")}
+            value={profile.matricNo}
+            onChange={update("matricNo")}
           />
         </FormField>
         <button

@@ -3,7 +3,7 @@
     "fullName": "mba samuel",
     "email": "samuelifeanyi943@gmail.com",
     "role": "Administrator",
-    "phone": "07040405156",
+    "matricNo": "07040405156",
     "name": "Mba samuel"
   },
   "systemSettings": {
@@ -18,7 +18,7 @@
       "age": 21,
       "department": "Computer Science",
       "level": "400",
-      "phone": "07040405156",
+      "matricNo": "07040405156",
       "id": 1788282946895
     },
     {

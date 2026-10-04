@@ -1,11 +1,10 @@
-// =====================================================================
 // SMS Backend API — Express + MongoDB (mongoose)
 // Exposes REST endpoints for:
 //   - Admin profile      GET/POST /api/profile
 //   - System settings    GET/POST /api/settings/system
 //   - Students CRUD      GET/POST /api/students, PUT/DELETE /api/students/:id
-// NOTE: `fs` / `DB_FILE` are leftovers — all data lives in MongoDB here.
-// =====================================================================
+
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
@@ -14,19 +13,18 @@ const Student = require("./model/Student");
 const Profile = require("./model/Profile");
 const SystemSettings = require("./model/systemSettings");
 const { default: mongoose } = require("mongoose");
+const studentRoutes = require("./routes/students");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const DB_FILE = path.join(__dirname, "db.json");
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-const MONGO_URL = "mongodb://localhost:27017/sms_database";
-
 mongoose
-  .connect(MONGO_URL)
+  .connect(process.env.MONGODB_URL)
   .then(() => console.log("connected to MongoDB successfully"))
   .catch((err) => console.log("MongoDB connection error:", err));
 
@@ -41,7 +39,7 @@ app.get("/api/profile", async (req, res) => {
         fullName: "mba samuel",
         email: "samuelifeanyi943@gmail.com",
         role: "Administrator",
-        phone: "07040405156",
+        matricNo: "07040405156",
       });
     }
     res.json(profile);
@@ -163,6 +161,9 @@ app.delete("/api/students/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete student" });
   }
 });
+
+// This mounts your /bulk route at http://localhost:5000/api/students/bulk
+app.use("/api/students", studentRoutes);
 
 // Start Server
 app.listen(PORT, () => {

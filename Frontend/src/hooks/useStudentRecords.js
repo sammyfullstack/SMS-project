@@ -96,7 +96,7 @@ export default function useStudentRecords(
         !q ||
         s.name?.toLowerCase().includes(q) ||
         s.email?.toLowerCase().includes(q) ||
-        String(s.phone || "").includes(q);
+        String(s.matricNo || "").includes(q);
       const matchesDept = deptFilter === "all" || s.department === deptFilter;
       const matchesLevel = levelFilter === "all" || s.level === levelFilter;
       return matchesSearch && matchesDept && matchesLevel;
@@ -130,7 +130,7 @@ export default function useStudentRecords(
     setForm({
       ...student,
       age: String(student.age),
-      phone: String(student.phone),
+      matricNo: String(student.matricNo),
     });
     setErrors({});
     setDrawerOpen(true);
@@ -159,7 +159,7 @@ export default function useStudentRecords(
       age: Number(form.age),
       department: form.department,
       level: form.level,
-      phone: form.phone.trim(),
+      matricNo: form.matricNo.trim(),
     };
 
     try {

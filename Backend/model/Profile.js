@@ -10,7 +10,7 @@ const profileSchema = new mongoose.Schema({
   role: String,
   // Stored as text so formats like "+234 0700 000 000" survive (a Number
   // type would strip leading zeros and punctuation).
-  phone: String,
+  matricNo: String,
 });
 
 module.exports = mongoose.model("Profile", profileSchema);

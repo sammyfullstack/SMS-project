@@ -16,21 +16,29 @@ const light = {
     justifyContent: "space-between",
     padding: "20px 16px",
     flexShrink: 0,
+    height: "100%",
+    minHeight: "100vh",
   },
   brandHeader: {
     display: "flex",
     alignItems: "center",
     gap: 12,
     marginBottom: 28,
+    justifyContent: "flex-start",
   },
   logoIcon: {
     width: 36,
     height: 36,
-    backgroundColor: "#2563EB",
+    backgroundColor: "transparent",
     borderRadius: 8,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  logoImg: {
+    width: 36,
+    height: 36,
+    borderRadius: "18px",
   },
   brandTitle: {
     fontSize: 16,
@@ -263,6 +271,7 @@ const light = {
   },
   tableSearchInput: {
     border: "none",
+    background: "transparent",
     outline: "none",
     fontSize: 13,
     width: "100%",

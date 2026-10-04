@@ -86,7 +86,7 @@ export default function DepartmentsView({ departmentsInUse, students, theme }) {
                     {s.name || s.Name}
                   </td>
                   <td style={{ padding: "10px 8px" }}>
-                    {s.matricNo || s.phone || "N/A"}
+                    {s.matricNo || s.matricNo || "N/A"}
                   </td>
                   <td style={{ padding: "10px 8px" }}>
                     {s.level || s.Level || "N/A"}

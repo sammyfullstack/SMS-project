@@ -1,9 +1,8 @@
-// ---------------------------------------------------------------------------
 // StudentsView — content of the Dashboard/Students route (both share the same
 // stats + table). Composes the stat cards, the filter/search toolbar, the
 // student table (StudentTable) and the pagination row. All data arrives via
 // props from the useStudentRecords hook (see hooks/useStudentRecords.js).
-// ---------------------------------------------------------------------------
+
 import { StatCard } from "./UIComponents";
 import {
   SearchIcon,
@@ -42,21 +41,32 @@ export default function StudentsView({
 }) {
   const styles = getStyles(theme);
 
+  //Calculate students created in the current calender month
+  const now = new Date();
+  const addedThisMonth = students.filter((student) => {
+    if (!student.createdAt) return false;
+    const createdDate = new Date(student.createdAt);
+    return (
+      createdDate.getMonth() === now.getMonth() &&
+      createdDate.getFullYear() === now.getFullYear()
+    );
+  }).length;
+
   return (
     <>
       {/* Stat cards — quick totals */}
       <div style={styles.statsGrid}>
         <StatCard
-          icon={<StudentsIcon color="#2563EB" size={20} />}
+          icon={<StudentsIcon sx={{ color: "#2563EB", fontSize: 20 }} />}
           iconBg="#EFF6FF"
           title="Total Students"
           value={students.length}
-          badge="+12 this month"
+          badge={`+${addedThisMonth} this month`}
           badgeColor="#059669"
           theme={theme}
         />
         <StatCard
-          icon={<DeptIcon color="#059669" size={20} />}
+          icon={<DeptIcon sx={{ color: "#059669", fontSize: 20 }} />}
           iconBg="#ECFDF5"
           title="Departments"
           value={departmentsInUse.length}
@@ -64,7 +74,7 @@ export default function StudentsView({
           theme={theme}
         />
         <StatCard
-          icon={<LevelsIcon color="#D97706" size={20} />}
+          icon={<LevelsIcon sx={{ color: "#D97706", fontSize: 20 }} />}
           iconBg="#FFFBEB"
           title="Levels"
           value="5"
@@ -72,7 +82,7 @@ export default function StudentsView({
           theme={theme}
         />
         <StatCard
-          icon={<ActiveIcon color="#7C3AED" size={20} />}
+          icon={<ActiveIcon sx={{ color: "#7C3AED", fontSize: 20 }} />}
           iconBg="#F3E8FF"
           title="Active Students"
           value={students.length}
@@ -87,11 +97,11 @@ export default function StudentsView({
         <div style={styles.toolbar}>
           <div style={styles.filterGroup}>
             <div style={styles.tableSearchBox}>
-              <SearchIcon size={16} color="#9CA3AF" />
+              <SearchIcon sx={{ fontSize: 16, color: "#9CA3AF" }} />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by name, email or phone..."
+                placeholder="Search by name, email or matricNo..."
                 style={styles.tableSearchInput}
               />
             </div>
@@ -119,10 +129,12 @@ export default function StudentsView({
                 </option>
               ))}
             </select>
-            <button style={styles.primarySearchBtn}>Search</button>
+            <button className="search-btn" style={styles.primarySearchBtn}>
+              Search
+            </button>
           </div>
 
-          <button onClick={openAdd} style={styles.addBtn}>
+          <button className="add-btn" onClick={openAdd} style={styles.addBtn}>
             <span style={{ fontSize: 16, marginRight: 4 }}>+</span> Add Student
           </button>
         </div>
