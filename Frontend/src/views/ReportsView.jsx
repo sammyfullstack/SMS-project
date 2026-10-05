@@ -14,7 +14,9 @@ export default function ReportsView({ theme }) {
     try {
       setExporting(true);
       //set all student records from Express backend
-      const res = await axios.get("http://localhost:5000/api/students");
+      const res = await axios.get(
+        "https://sms-project-ots.onrender.com/api/students",
+      );
       const students = res.data;
 
       if (!students || students.length === 0) {

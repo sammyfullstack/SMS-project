@@ -54,7 +54,7 @@ export default function ImportStudents({ styles }) {
 
         // Send to your Express backend
         const response = await axios.post(
-          "http://localhost:5000/api/students/bulk",
+          "https://sms-project-ots.onrender.com/api/students/bulk",
           jsonData,
         );
         alert(`${response.data.count} students imported successfully!`);

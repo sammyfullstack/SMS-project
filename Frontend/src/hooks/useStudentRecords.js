@@ -10,7 +10,8 @@ import { DEPARTMENTS, emptyForm } from "../constants/studentData";
 import { validate } from "../utils/helper";
 
 export default function useStudentRecords(
-  apiUrl = "http://localhost:5000/api",
+  apiUrl = import.meta.env.VITE_API_URL ||
+    "https://sms-project-ots.onrender.com/api",
 ) {
   // ----- data + persistence status -----
   const [students, setStudents] = useState([]);

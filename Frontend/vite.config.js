@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5000", // Change to express port
+        target: "https://sms-project-ots.onrender.com", // Change to express port
         changeOrigin: true,
       },
     },
