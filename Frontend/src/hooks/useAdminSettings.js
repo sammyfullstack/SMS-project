@@ -6,7 +6,7 @@
 import { useState, useEffect } from "react";
 
 export default function useAdminSettings(
-  apiUrl = "https://sms-project-ots.onrender.com/api",
+  API_URL = "https://sms-project-ots.onrender.com/api",
 ) {
   // Admin profile — single source of truth for the header name/role and the
   // Settings > Profile form. Seeded from the backend on mount (see effect).
@@ -38,7 +38,7 @@ export default function useAdminSettings(
     // the header + Settings form read `profileSettings.name`. We map the
     // response into `profileSettings` — the state that is actually rendered —
     // so the header reflects the saved name after a page refresh.
-    fetch(`${apiUrl}/profile`)
+    fetch(`${API_URL}/profile`)
       .then((res) => res.json())
       .then((data) => {
         if (data && (data.name || data.fullName)) {
@@ -53,7 +53,7 @@ export default function useAdminSettings(
       .catch((err) => console.error("Error fetching profile:", err));
 
     // Academic / institutional settings.
-    fetch(`${apiUrl}/settings/system`)
+    fetch(`${API_URL}/settings/system`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.schoolName) {
@@ -65,7 +65,7 @@ export default function useAdminSettings(
         }
       })
       .catch((err) => console.error("Error fetching system settings:", err));
-  }, [apiUrl]);
+  }, [API_URL]);
 
   // Save the admin profile (POST /api/profile). The Profile schema stores the
   // name under `fullName`, so we map `profileSettings.name` → `fullName` in
@@ -73,7 +73,7 @@ export default function useAdminSettings(
   // and the old default would come back after a refresh.
   async function handleSaveProfile() {
     try {
-      const response = await fetch(`${apiUrl}/profile`, {
+      const response = await fetch(`${API_URL}/profile`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -105,7 +105,7 @@ export default function useAdminSettings(
     }
 
     try {
-      const response = await fetch(`${apiUrl}/settings/system`, {
+      const response = await fetch(`${API_URL}/settings/system`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(systemSettings),

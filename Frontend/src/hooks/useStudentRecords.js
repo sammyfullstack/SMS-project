@@ -9,10 +9,10 @@ import { useState, useEffect, useMemo } from "react";
 import { DEPARTMENTS, emptyForm } from "../constants/studentData";
 import { validate } from "../utils/helper";
 
-export default function useStudentRecords(
-  apiUrl = import.meta.env.VITE_API_URL ||
-    "https://sms-project-ots.onrender.com/api",
-) {
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://sms-project-ots.onrender.com/api";
+
+export default function useStudentRecords() {
   // ----- data + persistence status -----
   const [students, setStudents] = useState([]);
   const [loaded, setLoaded] = useState(false);
@@ -34,11 +34,11 @@ export default function useStudentRecords(
 
   // Load the student list from the backend API once on mount.
   useEffect(() => {
-    fetch(`${apiUrl}/students`)
+    fetch(`${API_URL}/students`)
       .then((res) => res.json())
       .then((data) => setStudents(data))
       .catch((err) => console.error("Error loading students:", err));
-  }, [apiUrl]);
+  }, [API_URL]);
 
   // Also reload from the Electron `window.storage` API on startup, so the
   // locally-saved copy (which survives app restarts) is restored.
@@ -165,8 +165,8 @@ export default function useStudentRecords(
 
     try {
       const url = editingId
-        ? `${apiUrl}/students/${editingId}`
-        : `${apiUrl}/students`;
+        ? `${API_URL}/students/${editingId}`
+        : `${API_URL}/students`;
       const method = editingId ? "PUT" : "POST";
 
       const response = await fetch(url, {
@@ -192,7 +192,7 @@ export default function useStudentRecords(
   // Delete a student via the API, then drop it from the local list.
   async function handleDelete(id) {
     try {
-      const response = await fetch(`${apiUrl}/students/${id}`, {
+      const response = await fetch(`${API_URL}/students/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete");
